@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>רודיון לזוריק</title>
+    
+    <link href="Style/StyleSheet.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url('Images/ukrainaflag.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    
+    <script lang="ja" type="text/javascript">
+        //הסיסמה היא האורך זוגי בדוק שהסיסמא חייבת להיות פלינדרום  וגם התו השני והתו אחד לפני האחרון חייב להיות אות באנגלית קטנה 
+        function CheckForm() {
+            //בדיקת שם
+            var Fname = document.getElementById("fname").value;
+            if (Fname == "") {
+                alert("מלא שם פרטי");
+                return false;
+            }
+
+            if (Fname.length < 2 || Fname.length > 10) {
+                alert("כמות תוים בשם פרטי בין 2 ל10 ");
+                return false;
+            }
+            if (IsOnlyHebrew(Fname) == false) {
+                alert(" השם הפרטי רק בעברית ולי מספרים");
+                return false;
+            }
+            //בדיקת שם משפחה
+            var Lname = document.getElementById("lname").value;
+            if (Lname == "") {
+                alert("מלא שם משפחה ");
+                return false;
+            }
+            if (Lname.length < 2 || Lname.length > 20) {
+                alert("כמות תוים בשם משפחה בין 2 20 ");
+                return false;
+            }
+            if (IsOnlyHebrew(Lname) == false) {
+                alert("שם משפחה רק בעברית ובלי מספרים");
+                return false;
+            }
+            // בדיקת כתובת
+            var address = document.getElementById("address").value;
+            if (address == "") {
+                alert("מלא כתובת ");
+                return false;
+            }
+            //בדיקת גיל
+            var Age = document.getElementById("age").value;
+            if (Age == "") {
+                alert("מלא גיל ");
+                return false;
+            }
+            if (IsOnlyNumber(Age) == false) {
+                alert("רק מספרים בגיל");
+                return false;
+            }
+            if (Age > 80 || Age < 10) {
+                alert("הגיל בין 10 ל80 ");
+                return false;
+            }
+            //בדיקת אימייל
+            var Mail = document.getElementById("mail").value;
+            var x = Mail.indexOf("@");
+
+            if (Mail == "") {
+                alert("מלא האימייל ");
+                return false;
+            }
+
+            if (Mail.indexOf("@") == -1 || Mail.indexOf("@") != Mail.lastIndexOf("@")) {
+                alert("@ חסר או יש יותר מאחד");
+                return false;
+            }
+            if (Mail.indexOf("@.") != -1) {
+                alert("אסור נקודה אחרי @");
+                return false;
+            }
+            if (Mail.indexOf(".") == -1) {
+                alert("חייב שיהיה נקודה באימייל");
+                return false;
+            }
+            //בדיקת סיסמא
+            var Pass = document.getElementById("pass").value;
+            if (Pass == "") {
+                alert("מלא סיסמא ");
+                return false;
+            }
+            if (Pass.length < 4 || Pass.length > 20) {
+                alert("כמות תוים בסיסמא בין 4 ל20 ");
+                return false;
+            }
+            //בדיקת אימות סיסמא
+            var Passv = document.getElementById("passv").value;
+            if (Pass != Passv) {
+                alert("אימות סיסמא לא נכון ");
+                return false;
+            }
+            //בדיקת העיר
+            var City = document.getElementById("city");
+            if (City.selectedIndex == 0) {
+                alert("בחר עיר");
+                return false;
+            }
+            //בדיקת מגדר
+            var Gender = document.getElementsByName("gender");
+            if (Gender[0].checked == false && Gender[1].checked == false) {
+                alert("בחר מגדר");
+                return false;
+            }
+            //בדיקה שנבחרו לפחות שתי תחביבים
+            var Hobby = document.getElementsByName("hobby");
+            var hobbycount = 0;
+            for (var i = 0; i < Hobby.length; i++) {
+                if (Hobby[i].checked == true) {
+                    hobbycount++
+                }
+            }
+
+            if (hobbycount < 2) {
+                alert("תבחר  לפחות שתי תחביבים");
+                var hobbycount = 0;
+                return false;
+
+
+            }
+
+            alert("הטופס נשלח");
+            return true;
+        }
+
+        function IsOnlyHebrew(str) {
+            for (var i = 0; i < str.length; i++) {
+                if (!(str.charAt(i) >= 'א' && str.charAt(i) <= 'ת')) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function IsOnlyNumber(num) {
+
+
+            for (var i = 0; i < num.length; i++) {
+                if (!(num.charAt(i) >= '0' && num.charAt(i) <= '9')) {
+                    return false;
+                }
+            }
+            return true;
+
+        }
+
+
+        function IsOnlyEnglish(str) {
+
+            for (var i = 0; i < str.length; i++) {
+                if (!(str.charAt(i) >= 'a' && str.charAt(i) <= 'z')) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+
+
+</head>
+<body>
+    <table style="margin:auto;">
+        <tr>
+            <td style=" padding: 10px;">
+                <div>שלום אורח</div>
+            </td>
+            <td class="navbartd" style=" padding: 10px;">
+                <a href="Login.aspx"><img src="Images/login_icon.png" width="40" height="40" /></a>
+
+                <div>כניסה למניוים</div>
+            </td>
+            <td class="navbartd">
+
+                <a href="Main.aspx"><img src="Images/home_icon.png" width="40" height="40" /></a>
+                <div>דף ראשי</div>
+            </td>
+        </tr>
+    </table>
+    <!--<div style="text-align:center;color:red;font-size:50px;color:green">   הרשמה  </div>-->
+    <br />
+    <table border="0" name="table" style="margin: 0 auto; width: 300px; height: 400px; direction: rtl ">
+        <tr>
+            <td>
+            </td>
+            <td>
+                <form id="myform" name="myform" onsubmit="return CheckForm()" style="background-color:cornflowerblue" method="get" action="insert.aspx">
+                    <table border="1" style="margin: 0 auto; width: 300px; height: 400px; text-align: center; background-color: lightskyblue; direction: ltr ">
+                        <tr>
+                            <td colspan="2">הרשמה</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; background-color:lightskyblue">
+                                <input type="text" id="fname" name="fname" />
+                            </td>
+                            <td style="white-space:nowrap">
+                                שם פרטי
+                            </td>
+                        <tr>
+
+                            <td style="text-align: right; background-color: lightskyblue;white-space:nowrap">
+                                <input type="text" id="lname" name="lname" />
+                            </td>
+                            <td style="white-space:nowrap">
+                                שם משפחה
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <td style="text-align: right; background-color: lightskyblue">
+                                <input type="text" id="address" name="address" />
+                            </td>
+                            <td>
+                                כתובת
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; background-color: lightskyblue">
+                                <input type="text" id="age" name="age" />
+                            </td>
+                            <td>
+                                גיל
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="text-align: right; background-color: lightskyblue">
+                                <input type="text" id="mail" name="mail" />
+                            </td>
+                            <td>
+                                אימיל
+                            </td>
+                        <tr>
+                            <td style="text-align: right; background-color: lightskyblue">
+                                <input type="password" id="pass" name="pass" />
+                            </td>
+                            <td>
+                                סיסמא
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; background-color: lightskyblue">
+                                <input type="password" id="passv" name="passv" />
+                            </td>
+                            <td>
+                                אימות סיסמא
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <select id="city" name="city">
+                                    <option value="">בחר עיר</option>
+                                    <option value="תל אביב">תל אביב</option>
+                                    <option value="חיפה">חיפה</option>
+                                    <option value="בית אריה">בית אריה</option>
+                                </select>
+                            </td>
+                            <td>
+                                עיר
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="text-align:right">
+                                <input type="radio" id="man" name="gender" value="גבר" />&nbsp; גבר
+                                <br />
+                                <input type="radio" id="woman" name="gender" value="אישה" />&nbsp; אישה
+                            </td>
+                            <td>
+                                מגדר
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="text-align:right">
+                                <input type="checkbox" id="swim" name="hobby" value="שחיה" />&nbsp; שחיה
+                                <br />
+                                <input type="checkbox" id="run" name="hobby" value="ריצה" />&nbsp; ריצה
+                                <br />
+                                <input type="checkbox" id="football" name="hobby" value="כדורגל" />&nbsp; כדורגל
+                                <br />
+                                <input type="checkbox" id="basketball" name="hobby" value="כדורסל" />&nbsp; כדורסל
+                            </td>
+                            <td>
+                                תחביב
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <textarea id="info" name="info" rows="5" cols="40"></textarea>
+                            </td>
+                            <td>
+                                הערות - אופציות
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <input type="submit" id="submit" value="שלח" />&nbsp;&nbsp;&nbsp;
+                                <input type="reset" id="reset" value="מחק" />
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                </form>
+            </td>
+
+        </tr>
+    </table>
+
+
+
+</body>
+</html>

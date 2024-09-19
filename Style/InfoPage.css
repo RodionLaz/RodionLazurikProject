@@ -1,0 +1,14 @@
+﻿body {
+    background: linear-gradient(55deg, #e6c200 0%, #0072c6 100%);
+    font-family: 'Guttman Hatzvi';
+    direction: rtl;
+}
+.navbartd {
+    text-align:center;
+}
+td {
+    padding: 10px;
+}
+.text {
+color:yellow;
+}
